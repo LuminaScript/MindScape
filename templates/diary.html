@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindScape - Personal Diary</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      div {
+        box-sizing: border-box;
+      }
+
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* MindScape */
+      .mindScape {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .mindScape .content {
+        width: 1440px;
+        height: 1012px;
+        padding-bottom: 60px;
+        padding-left: 167px;
+        padding-right: 167px;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+        background: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 70px;
+        display: inline-flex;
+      }
+
+      .mindScape .content .header {
+        align-self: stretch;
+        justify-content: space-between;
+        align-items: center;
+        display: inline-flex;
+      }
+
+      .mindScape .content .header .logo {
+        width: 222px;
+        height: 54px;
+        position: relative;
+      }
+
+      .mindScape .content .header .logo .text {
+        left: 52px;
+        top: 7px;
+        position: absolute;
+        color: #3b5053;
+        font-size: 28px;
+        font-family: Outfit;
+        font-weight: 700;
+        letter-spacing: 3.36px;
+        word-wrap: break-word;
+      }
+
+      .mindScape .content .header .logo .icon {
+        width: 54px;
+        height: 54px;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+      }
+
+      .mindScape .content .header .nav {
+        justify-content: flex-start;
+        align-items: center;
+        gap: 51px;
+        display: flex;
+      }
+
+      .mindScape .content .header .nav .nav-item {
+        color: #656566;
+        font-size: 16px;
+        font-family: Inter;
+        font-weight: 500;
+        word-wrap: break-word;
+      }
+
+      .mindScape .content .header .signup {
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 6px;
+        padding-bottom: 12px;
+        background: #3b5053;
+        border-radius: 40px;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        display: flex;
+      }
+
+      .mindScape .content .header .signup .signup-text {
+        color: white;
+        font-size: 16px;
+        font-family: Inter;
+        font-weight: 500;
+        word-wrap: break-word;
+      }
+
+      /* .mindScape .content .title {
+        width: 504px;
+        color: #3b5053;
+        font-size: 48px;
+        font-family: Inter;
+        font-weight: 700;
+        line-height: 56px;
+        word-wrap: break-word;
+      } */
+      .mindScape .content .title {
+        color: #3b5053;
+        font-size: 48px;
+        font-family: Inter;
+        font-weight: 700;
+        line-height: 48px; /* Adjust the line height to match the font size */
+        margin-top: 0px; /* Add margin to move the title closer to the top */
+        white-space: nowrap; /* Prevent line breaks */
+        overflow: hidden; /* Hide overflow if the title is too long */
+        text-overflow: ellipsis; /* Show ellipsis (...) if the title overflows */
+        width: 100%; /* Allow the title to take the full width */
+      }
+
+      .mindScape .content .description {
+        width: 1103px;
+        height: 102px;
+        justify-content: space-between;
+        align-items: center;
+        display: inline-flex;
+      }
+
+      .mindScape .content .description .info {
+        width: 1102px;
+        height: 168px;
+        padding-top: 50px;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        display: inline-flex;
+      }
+
+      .mindScape .content .description .info .icon-1,
+      .mindScape .content .description .info .icon-2,
+      .mindScape .content .description .info .icon-3 {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        opacity: 0;
+      }
+
+      .mindScape .content .description .info .icon-1 .bg,
+      .mindScape .content .description .info .icon-2 .bg,
+      .mindScape .content .description .info .icon-3 .bg {
+        width: 40px;
+        height: 40px;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+        background: #f1f3f7;
+        border: 1px #6d758f solid;
+      }
+
+      .mindScape .content .description .info .icon-1 .number,
+      .mindScape .content .description .info .icon-2 .number,
+      .mindScape .content .description .info .icon-3 .number {
+        left: 12.67px;
+        top: 11.67px;
+        position: absolute;
+        text-align: center;
+        color: #6d758f;
+        font-size: 12px;
+        font-family: Inter;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 18px;
+        letter-spacing: 0.96px;
+        word-wrap: break-word;
+      }
+
+      .mindScape .content .description .info .description-text {
+        align-self: stretch;
+        color: #6c716f;
+        font-size: 16px;
+        font-family: Inter;
+        font-weight: 400;
+        line-height: 24px;
+        word-wrap: break-word;
+      }
+
+      .mindScape .content .description .info .icon-2 .number {
+        left: 8px;
+        top: 21.56px;
+        position: absolute;
+      }
+
+      .mindScape .content .description .info .icon-3 .number {
+        left: 32.75px;
+        top: 57.69px;
+        position: absolute;
+      }
+
+      .mindScape .content .description .info .icon-4 {
+        height: 38.92px;
+      }
+
+      /* .mindScape .content .background {
+        width: 1104px;
+        height: 179px;
+        background: #f9eaff;
+      } */
+      .mindScape .content .background {
+        width: 1104px;
+        height: 179px;
+        background: #f9eaff;
+        display: flex;
+        flex-direction: column; /* Allow multiple lines */
+        justify-content: flex-start;
+        align-items: flex-start; /* Align input to the top */
+        padding: 20px; /* Add some padding for spacing */
+        box-sizing: border-box; /* Include padding in width and height */
+      }
+
+      .mindScape .content .background input.background {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 20px; /* Increase font size */
+        font-family: Inter;
+        font-weight: 400;
+        color: #6c716f;
+        padding: 0; /* Remove default input padding */
+        resize: none; /* Disable textarea resizing */
+      }
+
+      .mindScape .content .background input.background::placeholder {
+        text-align: left; /* Align placeholder to the left */
+        vertical-align: top; /* Align placeholder to the top */
+      }
+
+      .mindScape .footer {
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        left: 167px;
+        top: 796px;
+        position: absolute;
+        background: linear-gradient(87deg, #f3d1ff 0%, #a429ff 100%);
+        box-shadow: 0px 1px 4px rgba(24.73, 32.61, 60.56, 0.08);
+        border-radius: 23px;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
+        display: inline-flex;
+      }
+
+      .mindScape .footer .submitted-text {
+        text-align: center;
+        color: white;
+        font-size: 14px;
+        font-family: Inter;
+        font-weight: 600;
+        line-height: 20px;
+        word-wrap: break-word;
+      }
+      #analyzeAndDisplay:hover {
+        background-color: #007bff; /* Change to the desired hover background color */
+      }
+
+      .mindScape .footer .icon {
+        width: 12px;
+        height: 12px;
+        padding-left: 1.8px;
+        padding-right: 1.8px;
+        padding-top: 1.88px;
+        padding-bottom: 1.88px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+
+      .mindScape .footer .icon .checkmark {
+        width: 8.4px;
+        height: 8.24px;
+        position: relative;
+      }
+
+      .mindScape .footer .icon .checkmark .horizontal-line {
+        width: 4.32px;
+        height: 8.24px;
+        left: 4.08px;
+        top: -0px;
+        position: absolute;
+        border: 1.29px white solid;
+      }
+      #song-titles-container {
+        font: 30;
+        border: 2px solid #ff69b4;
+        padding: 10px;
+        margin-top: 20px;
+        display: none;
+      }
+      #song-titles-container div {
+        font: 30;
+        margin-bottom: 5px;
+      }
+      .mindScape .footer .icon .checkmark .vertical-line {
+        width: 8.4px;
+        height: 0px;
+        left: 0px;
+        top: 4.12px;
+        position: absolute;
+        border: 1.29px white solid;
+      }
+      #music-links {
+        margin-top: 0px; /* Adjust the top margin as needed */
+      }
+
+      .music-link {
+        display: block;
+        margin-bottom: 10px;
+        color: #007bff; /* Change link color to blue */
+        text-decoration: none; /* Remove the underline from links */
+        font-size: 20px;
+        font-style: italic; /* Italicize the text */
+        font-weight: bold; /* Make the text bold */
+      }
+
+      .music-link:hover {
+        text-decoration: underline; /* Underline links on hover */
+      }
+
+      /* Add additional styles if needed */
+
+      .youtube-link {
+        display: block;
+        margin-bottom: 10px;
+        color: #ff0000; /* Change link color to red */
+        text-decoration: underline; /* Add underline to links */
+        cursor: pointer; /* Change cursor to a pointer */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="mindScape">
+      <div class="content">
+        <div class="header">
+          <div class="logo">
+            <div class="text">MindScape</div>
+            <div class="icon"></div>
+          </div>
+          <div class="nav">
+            <div class="nav-item">Home</div>
+            <div class="nav-item">Product</div>
+            <div class="nav-item">Support</div>
+            <div class="nav-item">Contact</div>
+          </div>
+          <div class="signup">
+            <div class="signup-text">Sign up</div>
+          </div>
+        </div>
+        <div class="title">Personal Diary</div>
+        <div class="description">
+          <div class="info">
+            <div class="icon-1">
+              <div class="bg"></div>
+              <div class="number">24</div>
+            </div>
+            <div class="description-text">
+              Introducing a digital diary platform where users can write about
+              their day. The platform features an advanced AI that analyzes the
+              sentiment of each diary entry to understand the user's mood. Based
+              on this analysis, the AI then recommends music that matches the
+              user's current emotional state, offering a personalized experience
+              to enhance their day.
+            </div>
+            <div class="icon-2">
+              <div class="bg"></div>
+              <div class="number">32</div>
+            </div>
+            <div class="icon-3">
+              <div class="bg"></div>
+              <div class="number">80px</div>
+            </div>
+            <div class="icon-4"></div>
+          </div>
+        </div>
+
+        <div>
+          <textarea
+            class="background" id="diaryText"
+            placeholder="Enter your text here"
+          ></textarea>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="submitted-text">
+          <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+
+          
+
+
+      </div>
+    </div>
+    <div id="youtube-links"></div> -->
+    <div class="mindScape">
+      <div class="content">
+        <div class="header">
+          <div class="logo">
+            <div class="text">MindScape</div>
+            <div class="icon"></div>
+          </div>
+          <div class="nav">
+            <div class="nav-item">Home</div>
+            <div class="nav-item">Product</div>
+            <div class="nav-item">Support</div>
+            <div class="nav-item">Contact</div>
+          </div>
+          <div class="signup">
+            <div class="signup-text">Sign up</div>
+          </div>
+        </div>
+        <div class="title">Diary Music Sentiment Analysis</div>
+        <div class="description">
+          <div class="info">
+            <div class="icon-1">
+              <div class="bg"></div>
+              <div class="number">24</div>
+            </div>
+
+            <div id="song-titles-container">
+              <!-- Song titles will be displayed here -->
+            </div>
+            <div id="music-links"></div>
+
+            <!-- <div class="description-text">
+              Introducing a digital diary platform where users can write about
+              their day. The platform features an advanced AI that analyzes the
+              sentiment of each diary entry to understand the user's mood. Based
+              on this analysis, the AI then recommends music that matches the
+              user's current emotional state, offering a personalized experience
+              to enhance their day.
+            </div> -->
+            <div class="icon-2">
+              <div class="bg"></div>
+              <div class="number">32</div>
+            </div>
+            <div class="icon-3">
+              <div class="bg"></div>
+              <div class="number">80px</div>
+            </div>
+            <div class="icon-4"></div>
+          </div>
+        </div>
+
+        <div>
+          <textarea
+            class="background"
+            id="diaryText"
+            placeholder="Enter your text here"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="footer">
+        <!-- Single button to Analyze Sentiment and Display Links -->
+        <button
+          id="analyzeAndDisplay"
+          style="
+            border: 0px solid #000;
+            background-color: transparent;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+          "
+        >
+          Analyze Sentiment & Display Music Links
+        </button>
+      </div>
+
+      <!-- Pink box element to be displayed when YouTube links are present -->
+      <div id="pink-box" style="background-color: pink; display: none">
+        Pink Box (This will disappear when YouTube link is clicked)
+      </div>
+      <div id="song-titles-container">
+        <!-- Song titles will be displayed here -->
+      </div>
+    </div>
+
+    <!-- Container for displaying YouTube links -->
+    <!-- ... your existing HTML code ... -->
+
+    <script>
+      const linkDataArray = [];
+
+      document
+        .getElementById("analyzeAndDisplay")
+        .addEventListener("click", async () => {
+          const diaryText = document.getElementById("diaryText").value;
+          try {
+            const response = await fetch("/get_music_links", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ diary_text: diaryText }),
+            });
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log("data: ");
+            console.log(data);
+
+            if (Array.isArray(data)) {
+              // Check if data is an array
+              let linkCount = 0; // Counter for links
+              data.forEach((linkData) => {
+                // Check if we've added three links, and break the loop if so
+                if (linkCount >= 3) {
+                  return;
+                }
+                // Push link and title data into the array
+                linkDataArray.push(linkData);
+                linkCount++; // Increment the counter
+              });
+            } else {
+              console.log(
+                "No music links found or response format is incorrect",
+                data
+              );
+            }
+
+            // Display links and titles
+            const musicLinksContainer = document.getElementById("music-links");
+            musicLinksContainer.innerHTML = ""; // Clear the container before displaying links
+
+            linkDataArray.forEach((linkData) => {
+              const linkElement = document.createElement("a");
+              linkElement.href = linkData.link;
+              linkElement.textContent = linkData.title;
+              linkElement.className = "music-link";
+              musicLinksContainer.appendChild(linkElement);
+            });
+
+            // Show the pink box when links are displayed
+            document.getElementById("pink-box").style.display = "block";
+
+            // Display the title when songs are available
+            const songTitleContainer = document.getElementById(
+              "song-titles-container"
+            );
+            const songTitle = document.createElement("div");
+            songTitle.textContent = "The song for your moment";
+            songTitleContainer.insertBefore(
+              songTitle,
+              songTitleContainer.firstChild
+            );
+          } catch (error) {
+            console.error("Error occurred:", error);
+          }
+        });
+
+      function displaySongTitles(songTitles) {
+        const songTitlesContainer = document.getElementById(
+          "song-titles-container"
+        );
+        songTitlesContainer.innerHTML = ""; // Clear the container first
+
+        // Display each song title
+        songTitles.forEach((title) => {
+          const titleElement = document.createElement("div");
+          titleElement.textContent = title;
+          songTitlesContainer.appendChild(titleElement);
+        });
+
+        // Show the container
+        songTitlesContainer.style.display = "block";
+      }
+    </script>
+    <!-- ... your existing HTML code ... -->
+  </body>
+</html>

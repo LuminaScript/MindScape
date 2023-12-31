@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Links</title>
+  </head>
+  <body>
+    <h1>Music Links</h1>
+    <ul>
+      {% for link_data in music_links %}
+      <li>
+        <a href="{{ link_data.link }}" target="_blank">{{ link_data.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
