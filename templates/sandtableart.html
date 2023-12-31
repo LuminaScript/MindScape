@@ -4,6 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Page Title</title>
     <style>
+      /* Add a class to style the output list */
+      .output-list {
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 16px;
+        color: #282828;
+      }
       /* MindScape */
       .mind-scape {
         color: #1a1a1a;
@@ -44,6 +51,14 @@
         font-weight: 600;
         line-height: 20px;
         word-wrap: break-word;
+        cursor: pointer; /* Change cursor to pointer */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+      }
+
+      /* Hover effect for the Start Creating button */
+      .start-creating:hover {
+        background-color: #6f42c1; /* Change background color on hover */
+        color: #ffffff; /* Change text color on hover */
       }
 
       /* Grid background for top boxes */
@@ -54,13 +69,34 @@
       }
 
       /* Grey box style */
+      /* .grey-box {
+        width: 100px;
+        height: 40px;
+        background: #d9d9d9;
+        cursor: pointer;
+        user-drag: true;
+        position: absolute; /* Add absolute positioning 
+      } */
       .grey-box {
         width: 100px;
         height: 40px;
         background: #d9d9d9;
         cursor: pointer;
         user-drag: true;
-        position: absolute; /* Add absolute positioning */
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center content vertically and horizontally */
+      }
+
+      /* Text inside grey box */
+      .grey-box-content {
+        color: #1a1a1a;
+        font-size: 14px;
+        font-family: Inter;
+        font-weight: 600;
+        line-height: 1;
+        word-wrap: break-word;
       }
 
       /* Pink box style */
@@ -111,10 +147,21 @@
         </div>
       </div>
       <div style="align-self: stretch" class="ai-sandbox">AI SandBox</div>
-      <div class="grid-container">
+      <!-- <div class="grid-container">
         <div class="grey-box" id="greyBox1"></div>
         <div class="grey-box" id="greyBox2"></div>
         <div class="grey-box" id="greyBox3"></div>
+      </div> -->
+      <div class="grid-container">
+        <div class="grey-box" id="greyBox1">
+          <div class="grey-box-content">Ocean</div>
+        </div>
+        <div class="grey-box" id="greyBox2">
+          <div class="grey-box-content">Space</div>
+        </div>
+        <div class="grey-box" id="greyBox3">
+          <div class="grey-box-content">Whale</div>
+        </div>
       </div>
       <div
         style="
@@ -127,6 +174,7 @@
         "
       >
         <div
+          class="pink-box"
           style="
             width: 1045px;
             height: 127px;
@@ -148,7 +196,27 @@
           <!-- <div class="pink-box" id="pinkBox"></div> -->
         </div>
       </div>
+      <!-- <div
+        style="
+          padding-left: 18px;
+          padding-right: 18px;
+          padding-top: 14px;
+          padding-bottom: 14px;
+          background: linear-gradient(87deg, #844bdc 0%, #ac4ff1 100%);
+          box-shadow: 0px 1px 4px rgba(24.73, 32.61, 60.56, 0.08);
+          border-radius: 23px;
+          justify-content: center;
+          align-items: center;
+          gap: 3px;
+          display: inline-flex;
+        "
+      >
+        <div style="text-align: center" class="start-creating">
+          Start Creating
+        </div>
+      </div> -->
       <div
+        id="startButton"
         style="
           padding-left: 18px;
           padding-right: 18px;
@@ -167,12 +235,19 @@
           Start Creating
         </div>
       </div>
+      <div
+        id="storyOutput"
+        style="margin-top: 20px; font-family: Arial, sans-serif"
+      >
+        <!-- The story will be displayed here -->
+      </div>
     </div>
 
     <script>
       // JavaScript for making grey boxes movable and pink box droppable
       const greyBoxes = document.querySelectorAll(".grey-box");
-      const pinkBox = document.getElementById("pinkBox");
+      // const pinkBox = document.getElementById("pinkBox");
+      const pinkBox = document.querySelector(".pink-box");
 
       let isDragging = false;
       let currentBox = null;
@@ -198,28 +273,13 @@
             isDragging = false;
             document.onmousemove = null;
             document.onmouseup = null;
-
             if (isOverlapping(currentBox, pinkBox)) {
-              // If the grey box is dropped inside the pink box
-              pinkBox.appendChild(currentBox);
-              currentBox.style.left = "0px";
-              currentBox.style.top = "0px";
+              pinkBox.appendChild(currentBox); // Append the grey box to the pink box
+              currentBox.style.position = "static"; // Reset the position to align it inside the pink box
             }
           };
         });
       });
-
-      function isOverlapping(box1, box2) {
-        const rect1 = box1.getBoundingClientRect();
-        const rect2 = box2.getBoundingClientRect();
-
-        return (
-          rect1.left < rect2.right &&
-          rect1.right > rect2.left &&
-          rect1.top < rect2.bottom &&
-          rect1.bottom > rect2.top
-        );
-      }
 
       window.onload = () => {
         const greyBoxes = document.querySelectorAll(".grey-box");
@@ -238,6 +298,61 @@
           box.style.top = "250px";
         });
       };
+
+      // document.getElementById("startButton").addEventListener("click", () => {
+      //   const words = [];
+      //   const pinkBox = document.querySelector(".pink-box");
+
+      //   const pinkBoxWords = pinkBox.querySelectorAll(".grey-box-content");
+
+      //   pinkBoxWords.forEach((wordElement) => {
+      //     words.push(wordElement.textContent.trim());
+      //   });
+      //   console.log(words.join(" ")); // Logs the sentence formed by the words
+      // });
+      document.getElementById("startButton").addEventListener("click", () => {
+        const words = [];
+        const pinkBox = document.querySelector(".pink-box");
+        const pinkBoxWords = pinkBox.querySelectorAll(".grey-box-content");
+
+        pinkBoxWords.forEach((wordElement) => {
+          words.push(wordElement.textContent.trim());
+        });
+
+        // Check if exactly three nouns are collected
+        if (words.length === 3) {
+          fetch("/generate_story", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ nouns: words }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Story:", data.story);
+              // Here you can also update the front-end to display the story
+              document.getElementById("storyOutput").textContent = data.story;
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        } else {
+          console.log("Please collect exactly three nouns.");
+        }
+      });
+
+      function isOverlapping(element1, element2) {
+        const rect1 = element1.getBoundingClientRect();
+        const rect2 = element2.getBoundingClientRect();
+
+        return !(
+          rect1.right < rect2.left ||
+          rect1.left > rect2.right ||
+          rect1.bottom < rect2.top ||
+          rect1.top > rect2.bottom
+        );
+      }
     </script>
   </body>
 </html>

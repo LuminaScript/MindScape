@@ -1,9 +1,10 @@
-\
 from flask import Flask, render_template, request, jsonify
 from textblob import TextBlob
 import nltk
 from googlesearch import Search
 from flask_cors import CORS 
+import openai
+
 app = Flask(__name__)
 CORS(app)
 nltk.download('punkt')
@@ -14,6 +15,28 @@ nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 
 music_links_data = list()
+
+openai.api_key = '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'
+
+
+def generate_short_story(noun1, noun2, noun3):
+    prompt = f"Write a short story about {noun1}, {noun2}, and {noun3}."
+    response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        max_tokens=100
+    )
+    return response.choices[0].text.strip()
+
+@app.route('/generate_story', methods=['POST'])
+def handle_generate_story():
+    data = request.json
+    nouns = data.get('nouns', [])
+    if len(nouns) != 3:
+        return jsonify({"error": "Exactly three nouns are required"}), 400
+    story = generate_short_story(*nouns)
+    return jsonify({"story": story})
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -25,6 +48,10 @@ def diary():
 @app.route('/sandtable')
 def sandtable():
     return render_template("sandtable.html")
+
+@app.route('/sandtableart')
+def sandtableart():
+    return render_template("sandtableart.html")
 
 @app.route('/metachar')
 def metachar():
