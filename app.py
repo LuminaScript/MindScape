@@ -17,6 +17,27 @@ nltk.download('averaged_perceptron_tagger')
 music_links_data = list()
 
 openai.api_key = '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'
+def generate_image_from_story(story):
+    try:
+        response = openai.Image.create(
+            prompt=story,
+            n=1,
+            size="1024x1024"
+        )
+        image_url = response['data'][0]['url']
+        return image_url
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+@app.route('/generate_image', methods=['POST'])
+def handle_generate_image():
+    data = request.json
+    story = data.get('story', '')
+    if not story:
+        return jsonify({"error": "Story content is required"}), 400
+    image_url = generate_image_from_story(story)
+    return jsonify({"image_url": image_url})
 
 
 def generate_short_story(noun1, noun2, noun3):
@@ -24,7 +45,7 @@ def generate_short_story(noun1, noun2, noun3):
     response = openai.Completion.create(
         engine="text-davinci-002",
         prompt=prompt,
-        max_tokens=100
+        max_tokens=300
     )
     return response.choices[0].text.strip()
 

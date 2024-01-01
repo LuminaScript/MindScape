@@ -43,6 +43,18 @@
         word-wrap: break-word;
       }
 
+      #storyOutput {
+        width: 1045px; /* Same width as the pink box */
+        height: 127px; /* Same height as the pink box */
+        background: #f4e7f9; /* Light purple background */
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Similar box shadow to the pink box */
+        margin-top: 0px;
+        font-family: Arial, sans-serif;
+        padding: 10px; /* Padding inside the box */
+        overflow-y: auto; /* Enable scroll if content is too long */
+        border-radius: 5px; /* Rounded corners */
+      }
+
       /* Start Creating */
       .start-creating {
         color: white;
@@ -54,7 +66,14 @@
         cursor: pointer; /* Change cursor to pointer */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
       }
+      #imagePlaceholder img {
+        cursor: pointer; /* Change cursor to pointer on hover over the image */
+        transition: transform 0.3s ease; /* Smooth transform effect */
+      }
 
+      #imagePlaceholder img:hover {
+        transform: scale(1.05); /* Slightly increase size on hover */
+      }
       /* Hover effect for the Start Creating button */
       .start-creating:hover {
         background-color: #6f42c1; /* Change background color on hover */
@@ -162,6 +181,15 @@
         <div class="grey-box" id="greyBox3">
           <div class="grey-box-content">Whale</div>
         </div>
+        <div class="grey-box" id="greyBox3">
+          <div class="grey-box-content">Marine</div>
+        </div>
+        <div class="grey-box" id="greyBox3">
+          <div class="grey-box-content">Nebula</div>
+        </div>
+        <div class="grey-box" id="greyBox3">
+          <div class="grey-box-content">Odyssey</div>
+        </div>
       </div>
       <div
         style="
@@ -237,9 +265,50 @@
       </div>
       <div
         id="storyOutput"
-        style="margin-top: 20px; font-family: Arial, sans-serif"
+        style="margin-top: -10px; font-family: Arial, sans-serif"
       >
         <!-- The story will be displayed here -->
+      </div>
+
+      <div
+        id="startImageButton"
+        style="
+          padding-left: 18px;
+          padding-right: 18px;
+          padding-top: 14px;
+          padding-bottom: 14px;
+          background: linear-gradient(87deg, #844bdc 0%, #ac4ff1 100%);
+          box-shadow: 0px 1px 4px rgba(24.73, 32.61, 60.56, 0.08);
+          border-radius: 23px;
+          justify-content: center;
+          align-items: center;
+          gap: 3px;
+          display: inline-flex;
+        "
+      >
+        <div style="text-align: center" class="start-creating">
+          Visualize Your Mood
+        </div>
+      </div>
+      <div
+        id="imagePlaceholder"
+        style="
+          position: absolute;
+          margin-top: 250px;
+          /* top: -10px; */
+          margin-left: 860px;
+          width: 200px; /* Same height as pink box for square shape */
+          height: 200px;
+          background: lightgray; /* Placeholder background */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: Arial, sans-serif;
+          color: darkgray;
+          border-radius: 5px;
+        "
+      >
+        Image here
       </div>
     </div>
 
@@ -299,17 +368,6 @@
         });
       };
 
-      // document.getElementById("startButton").addEventListener("click", () => {
-      //   const words = [];
-      //   const pinkBox = document.querySelector(".pink-box");
-
-      //   const pinkBoxWords = pinkBox.querySelectorAll(".grey-box-content");
-
-      //   pinkBoxWords.forEach((wordElement) => {
-      //     words.push(wordElement.textContent.trim());
-      //   });
-      //   console.log(words.join(" ")); // Logs the sentence formed by the words
-      // });
       document.getElementById("startButton").addEventListener("click", () => {
         const words = [];
         const pinkBox = document.querySelector(".pink-box");
@@ -333,7 +391,27 @@
               console.log("Story:", data.story);
               // Here you can also update the front-end to display the story
               document.getElementById("storyOutput").textContent = data.story;
+              fetch("/generate_image", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ story: data.story }),
+              })
+                .then((imageResponse) => imageResponse.json())
+                .then((imageData) => {
+                  document.getElementById(
+                    "imagePlaceholder"
+                  ).innerHTML = `<img src="${imageData.image_url}" alt="Generated Image" style="width: 100%; height: 100%;">`;
+                  imgElement.addEventListener("click", () => {
+                    saveImage(imageData.image_url, "generated-image.png");
+                  });
+                })
+                .catch((error) => {
+                  console.error("Error generating image:", error);
+                });
             })
+
             .catch((error) => {
               console.error("Error:", error);
             });
@@ -352,6 +430,15 @@
           rect1.bottom < rect2.top ||
           rect1.top > rect2.bottom
         );
+      }
+
+      function saveImage(imageUrl, fileName) {
+        const link = document.createElement("a");
+        link.href = imageUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }
     </script>
   </body>
