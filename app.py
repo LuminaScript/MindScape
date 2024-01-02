@@ -70,6 +70,10 @@ def diary():
 def sandtable():
     return render_template("sandtable.html")
 
+@app.route('/sandlib')
+def sandlib():
+    return render_template("sandlib.html")
+
 @app.route('/sandtableart')
 def sandtableart():
     return render_template("sandtableart.html")

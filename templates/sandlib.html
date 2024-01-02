@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <style>
+      /* Hover Box */
+      .hover-box {
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        background: rgba(
+          244,
+          231,
+          249,
+          0.9
+        ); /* Pink background color with transparency */
+        border-radius: 5px;
+        display: none;
+        z-index: 100;
+        text-align: left;
+        box-shadow: 0 0 10px rgba(244, 231, 249, 0.7); /* Dreamy box shadow */
+        border: 1px solid transparent; /* Transparent border */
+        border-image-source: linear-gradient(
+          0deg,
+          #f4e7f9 20%,
+          transparent 80%,
+          #f4e7f9 100%
+        ); /* Wave line border */
+        border-image-slice: 1; /* Control the thickness of the wave lines */
+        border-image-repeat: repeat; /* Repeat the wave lines */
+        padding: 15px; /* Increase padding for better spacing */
+      }
+
+      /* Image Container */
+      .image-container {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      .image-container:hover .hover-box {
+        display: block;
+      }
+
+      /* Hover Effect */
+      .image-container:hover .hover-box {
+        display: block;
+      }
+
+      /* Positioning for each hover box */
+      .hover-box.top-left {
+        top: -50px;
+        left: -250px;
+      }
+
+      .hover-box.bottom-left {
+        bottom: -700px;
+        left: -135px;
+      }
+
+      .hover-box.top-right {
+        top: -50px;
+        right: -800px;
+      }
+
+      .hover-box.bottom-right {
+        bottom: -700px;
+        right: -750px;
+      }
+
+      /* MindScape */
+      .mind-scape {
+        width: 100%;
+        height: 100%;
+        padding-top: 30px;
+        padding-bottom: 80px;
+        padding-left: 167px;
+        padding-right: 167px;
+        background: white;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 60px;
+        display: inline-flex;
+      }
+
+      /* MindScape Title */
+      .mind-scape-title {
+        width: 1221px;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 280px;
+        display: inline-flex;
+      }
+
+      /* MindScape Logo */
+      .mind-scape-logo {
+        width: 222px;
+        height: 54px;
+        position: relative;
+      }
+      .clickable:hover {
+        transform: scale(1.1); /* Increase scale on hover */
+        transition: transform 0.3s; /* Add a smooth transition effect */
+      }
+
+      /* MindScape Logo Text */
+      .mind-scape-logo-text {
+        left: 52px;
+        top: 7px;
+        position: absolute;
+        color: #523b7e;
+        font-size: 28px;
+        font-family: Outfit;
+        font-weight: 700;
+        letter-spacing: 3.36px;
+        word-wrap: break-word;
+      }
+
+      /* MindScape Logo Image */
+      .mind-scape-logo-image {
+        width: 54px;
+        height: 54px;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+      }
+
+      /* MindScape Content */
+      .mind-scape-content {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+
+      /* AI SandTable Library Title */
+      .library-title {
+        width: 766px;
+        text-align: center;
+        color: #403b70;
+        font-size: 48px;
+        font-family: Inter;
+        font-weight: 800;
+        line-height: 48px;
+        word-wrap: break-word;
+      }
+
+      /* 24 Text */
+      .text-24 {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        opacity: 0;
+      }
+
+      /* 24 Text Background */
+      .text-24-bg {
+        width: 24px;
+        height: 24px;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+        background: #f1f3f7;
+        border: 1px #6d758f solid;
+      }
+
+      /* 24 Text Number */
+      .text-24-number {
+        left: 4px;
+        top: 7px;
+        position: absolute;
+        text-align: center;
+        color: #6d758f;
+        font-size: 12px;
+        font-family: Inter;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 18px;
+        letter-spacing: 0.96px;
+        word-wrap: break-word;
+      }
+
+      /* Description Text */
+      .description-text {
+        width: 537.92px;
+        text-align: center;
+        color: #8a8993;
+        font-size: 16px;
+        font-family: Inter;
+        font-weight: 400;
+        line-height: 24px;
+        word-wrap: break-word;
+      }
+
+      /* 32 Text */
+      .text-32 {
+        width: 32px;
+        height: 32px;
+        position: relative;
+        opacity: 0;
+      }
+
+      /* 32 Text Background */
+      .text-32-bg {
+        width: 32px;
+        height: 32px;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+        background: #f1f3f7;
+        border: 1px #6d758f solid;
+      }
+
+      /* 32 Text Number */
+      .text-32-number {
+        left: 8px;
+        top: 11.5px;
+        position: absolute;
+        text-align: center;
+        color: #6d758f;
+        font-size: 12px;
+        font-family: Inter;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 18px;
+        letter-spacing: 0.96px;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mind-scape">
+      <div class="mind-scape-title">
+        <div class="mind-scape-logo">
+          <div class="mind-scape-logo-text">MindScape</div>
+          <div class="mind-scape-logo-image"></div>
+        </div>
+      </div>
+      <div class="mind-scape-content">
+        <div class="library-title">AI SandTable Library</div>
+        <div class="text-24">
+          <div class="text-24-bg"></div>
+          <div class="text-24-number">24</div>
+        </div>
+        <div class="description-text">
+          From Automation to Intelligence, Shaping the Future
+        </div>
+        <div class="text-32">
+          <div class="text-32-bg"></div>
+          <div class="text-32-number">32</div>
+        </div>
+      </div>
+      <div style="width: 540.34px; height: 512.71px; position: relative">
+        <div class="image-container">
+          <img
+            class="clickable"
+            style="
+              width: 190.34px;
+              height: 191.2px;
+              left: 320.52px;
+              top: 321.52px;
+              position: absolute;
+              border-radius: 10px;
+            "
+            src="{{ url_for('static', filename='image-rightbottom.png') }}"
+          />
+          <div class="hover-box bottom-right">
+            <p>Your short story of about 40 words goes here...</p>
+          </div>
+        </div>
+
+        <div class="image-container">
+          <img
+            class="clickable"
+            style="
+              width: 150.04px;
+              height: 149.18px;
+              left: 120.89px;
+              top: 341.67px;
+              position: absolute;
+              border-radius: 10px;
+            "
+            src="{{ url_for('static', filename='image-leftbottom.png') }}"
+          />
+          <div class="hover-box bottom-left">
+            <p>Your short story of about 40 words goes here...</p>
+          </div>
+        </div>
+
+        <div class="image-container">
+          <img
+            class="clickable"
+            style="
+              width: 297.51px;
+              height: 297.51px;
+              left: 0px;
+              top: 0px;
+              position: absolute;
+              border-radius: 10px;
+            "
+            src="{{ url_for('static', filename='image-lefttop.png') }}"
+          />
+          <div class="hover-box top-left">
+            <p>Your short story of about 40 words goes here...</p>
+          </div>
+        </div>
+
+        <div class="image-container">
+          <img
+            class="clickable"
+            style="
+              width: 202.34px;
+              height: 202.34px;
+              left: 338px;
+              top: 68.86px;
+              position: absolute;
+              border-radius: 10px;
+            "
+            src="{{ url_for('static', filename='image-righttop.png') }}"
+          />
+          <div class="hover-box top-right">
+            <p>Your short story of about 40 words goes here...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
