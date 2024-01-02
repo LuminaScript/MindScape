@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Page Title</title>
     <style>
+      a {
+        text-decoration: none;
+      }
       /* Add a class to style the output list */
       .output-list {
         font-family: Inter;
@@ -115,6 +118,21 @@
         height: 40px;
         background: pink;
       }
+      /* Sand Table Library button */
+      #sandTableLibraryButton {
+        position: absolute;
+        top: 40px;
+        right: 200px;
+        padding: 10px;
+        font-size: 14px;
+        font-family: Inter;
+        font-weight: 700;
+        line-height: 20px;
+        word-wrap: break-word;
+        cursor: pointer;
+        color: white;
+        background-color: plum;
+      }
     </style>
   </head>
   <body>
@@ -143,6 +161,10 @@
           display: inline-flex;
         "
       >
+        <a href="/sandlib" id="sandTableLibraryButton" class="button-style"
+          >Sand Table Library</a
+        >
+
         <div style="width: 222px; height: 54px; position: relative">
           <div class="mind-scape">MindScape</div>
           <div

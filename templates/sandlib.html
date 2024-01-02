@@ -3,10 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
-    />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Function to fetch and display story and image in the left-top hover box
+        function fetchStoryAndImage() {
+          fetch("/get_latest_story_and_image")
+            .then((response) => response.json())
+            .then((data) => {
+              // Target the left-top hover box
+              console.log("data: ");
+              console.log(data);
+              const hoverBox = document.getElementById("left-top-hover-box");
+              hoverBox.innerHTML = `<p>${data.story}</p><img src="${data.image_url}" alt="Generated Image" style="max-width: 100%; height: auto;">`;
+            })
+            .catch((error) => console.error("Error:", error));
+        }
+
+        // Add event listener to the left-top image
+        const leftTopImage = document.getElementById("left-top-image");
+        if (leftTopImage) {
+          leftTopImage.addEventListener("click", fetchStoryAndImage);
+        }
+      });
+    </script>
+
     <style>
       /* Hover Box */
       .hover-box {
@@ -21,6 +41,7 @@
         ); /* Pink background color with transparency */
         border-radius: 5px;
         display: none;
+        overflow: auto;
         z-index: 100;
         text-align: left;
         box-shadow: 0 0 10px rgba(244, 231, 249, 0.7); /* Dreamy box shadow */
@@ -34,6 +55,8 @@
         border-image-slice: 1; /* Control the thickness of the wave lines */
         border-image-repeat: repeat; /* Repeat the wave lines */
         padding: 15px; /* Increase padding for better spacing */
+        color: purple; /* Sets the text color to purple */
+        font-style: italic; /* Makes the text italic */
       }
 
       /* Image Container */
@@ -81,7 +104,7 @@
         padding-bottom: 80px;
         padding-left: 167px;
         padding-right: 167px;
-        background: white;
+        background: rgb(248, 242, 246);
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
@@ -249,7 +272,8 @@
           <div class="text-24-number">24</div>
         </div>
         <div class="description-text">
-          From Automation to Intelligence, Shaping the Future
+          Welcome to the AI SandTable, your personal memory canvas where every
+          cherished moment transforms into a visual masterpiece.
         </div>
         <div class="text-32">
           <div class="text-32-bg"></div>
@@ -268,7 +292,7 @@
               position: absolute;
               border-radius: 10px;
             "
-            src="{{ url_for('static', filename='image-rightbottom.png') }}"
+            src="{{ url_for('static', filename='memory3.png') }}"
           />
           <div class="hover-box bottom-right">
             <p>Your short story of about 40 words goes here...</p>
@@ -286,7 +310,7 @@
               position: absolute;
               border-radius: 10px;
             "
-            src="{{ url_for('static', filename='image-leftbottom.png') }}"
+            src="{{ url_for('static', filename='memory4.png') }}"
           />
           <div class="hover-box bottom-left">
             <p>Your short story of about 40 words goes here...</p>
@@ -294,7 +318,7 @@
         </div>
 
         <div class="image-container">
-          <img
+          <!-- <img
             class="clickable"
             style="
               width: 297.51px;
@@ -304,9 +328,21 @@
               position: absolute;
               border-radius: 10px;
             "
-            src="{{ url_for('static', filename='image-lefttop.png') }}"
+            src="{{ url_for('static', filename='dreamybutton.png') }}"
+          /> -->
+          <img
+            id="left-top-image"
+            class="clickable"
+            style="
+              width: 297.51px;
+              height: 297.51px;
+              position: absolute;
+              border-radius: 10px;
+            "
+            src="{{ url_for('static', filename='memory.png') }}"
           />
-          <div class="hover-box top-left">
+
+          <div class="hover-box top-left" id="left-top-hover-box">
             <p>Your short story of about 40 words goes here...</p>
           </div>
         </div>
@@ -322,7 +358,7 @@
               position: absolute;
               border-radius: 10px;
             "
-            src="{{ url_for('static', filename='image-righttop.png') }}"
+            src="{{ url_for('static', filename='memory2.png') }}"
           />
           <div class="hover-box top-right">
             <p>Your short story of about 40 words goes here...</p>

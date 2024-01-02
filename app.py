@@ -14,6 +14,10 @@ nltk.download('averaged_perceptron_tagger')
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 
+# Global variables to store the latest story and image
+latest_story = None
+latest_image_url = None
+
 music_links_data = list()
 
 openai.api_key = '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'
@@ -32,11 +36,13 @@ def generate_image_from_story(story):
 
 @app.route('/generate_image', methods=['POST'])
 def handle_generate_image():
+    global latest_image_url
     data = request.json
     story = data.get('story', '')
     if not story:
         return jsonify({"error": "Story content is required"}), 400
     image_url = generate_image_from_story(story)
+    latest_image_url = image_url 
     return jsonify({"image_url": image_url})
 
 
@@ -51,11 +57,13 @@ def generate_short_story(noun1, noun2, noun3):
 
 @app.route('/generate_story', methods=['POST'])
 def handle_generate_story():
+    global latest_story
     data = request.json
     nouns = data.get('nouns', [])
     if len(nouns) != 3:
         return jsonify({"error": "Exactly three nouns are required"}), 400
     story = generate_short_story(*nouns)
+    latest_story = story
     return jsonify({"story": story})
 
 @app.route('/')
@@ -69,6 +77,13 @@ def diary():
 @app.route('/sandtable')
 def sandtable():
     return render_template("sandtable.html")
+
+
+@app.route('/get_latest_story_and_image', methods=['GET'])
+def get_latest_story_and_image():
+    # Logic to retrieve the latest story and image
+    # This might involve storing the last generated story and image in a global variable or database
+    return jsonify({"story": latest_story, "image_url": latest_image_url})
 
 @app.route('/sandlib')
 def sandlib():
