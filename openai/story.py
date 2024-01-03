@@ -1,7 +1,7 @@
 import openai
 
 # Set your OpenAI GPT-3 API key
-openai.api_key = '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'
+openai.api_key = '******'
 
 def generate_short_story(noun1, noun2, noun3):
     prompt = f"Write a short story about {noun1}, {noun2}, and {noun3}."
