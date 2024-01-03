@@ -17,6 +17,10 @@
         letter-spacing: 3.36px;
         word-wrap: break-word;
       }
+      .mind-scape {
+  margin-bottom: 20px; /* Adjust the value as needed */
+}
+
       a {
   text-decoration: none;
 }
@@ -43,7 +47,7 @@
 
       /* Your Therapeutic Meta Universe */
       .therapeutic-meta {
-        color: white;
+        color: rgb(7, 7, 7);
         font-size: 48px;
         font-family: Inter;
         font-weight: 800;
@@ -65,12 +69,15 @@
 
       /* Embark on a journey within 'MindScape' */
       .mind-scape {
-        color: #c8c2d2;
-        font-size: 16px;
+        color: #000000;
+        font-size: 18px;
         font-family: Inter;
+        font-style: italic;
         font-weight: 400;
         line-height: 24px;
         word-wrap: break-word;
+        margin-left: 400px;
+        margin-right: 400px;
       }
 
       /* 32 */
@@ -97,7 +104,7 @@
       .diary-sentiment,
 .ai-sand-table,
 .meta-character {
-  color: #fefefe;
+  color: #b021c2c8;
   font-size: 20px;
   font-family: Inter;
   font-weight: 700;
@@ -120,12 +127,7 @@
         width: 100%;
         height: 100%;
         padding-top: 20px;
-        background: linear-gradient(0deg, #05011f 0%, #05011f 100%),
-          radial-gradient(
-            170.39% 108.96% at 285.08% -429.93%,
-            rgba(83.96, 81, 229, 0.2) 0%,
-            rgba(11.36, 11, 29, 0.2) 100%
-          );
+        background: url('{{ url_for('static', filename='nebula.png') }}') center center / cover no-repeat;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
@@ -221,16 +223,27 @@
           "
         >
           <div class="therapeutic-meta">MindScape: Your Therapeutic Meta Universe</div>
+
+
           <div
             style="width: 24px; height: 24px; position: relative; opacity: 0;"
           >
             <div class="number-24">24</div>
           </div>
           <div class="mind-scape">
-            Embark on a journey within 'MindScape,' where your inner narrative
-            is embraced through Diary Sentiment Analysis, creativity flows at
-            the AI Sand Table, and your essence is mirrored by a unique Meta
-            Character.
+            Welcome to MindScape, your digital sanctuary for self-discovery and emotional exploration. Step into a realm where technology embraces your well-being. In MindScape, we invite you to embark on a transformative journey.
+            </div>
+            <div class="mind-scape">
+
+Dive into the depths of your emotions with our Sentiment Diary Analysis. Pour your thoughts into the digital pages, and let our AI analyze the nuances of your feelings. Explore the intricate landscape of your inner world, one word at a time.
+</div>
+
+<div class="mind-scape">
+Unleash your creativity at our AI Sand Table, where spiritual words transform into captivating stories and vivid images. Witness the magic of AI as it breathes life into your imagination.
+</div>
+
+<div class="mind-scape">
+MindScape is more than a web application; it's a path to personal growth and relaxation. Join us and begin your adventure within the digital universe of MindScape today.
           </div>
           <div
             style="width: 32px; height: 32px; position: relative; opacity: 0"
@@ -249,37 +262,7 @@
                 position: absolute;
               "
             >
-              <img
-                style="
-                  width: 617px;
-                  height: 640px;
-                  left: 747px;
-                  top: 125px;
-                  position: absolute;
-                "
-                src="{{ url_for('static', filename='robot.png') }}" 
-
-              />
-              <img
-                style="
-                  width: 769px;
-                  height: 496px;
-                  left: 0px;
-                  top: 240px;
-                  position: absolute;
-                "
-               src="{{ url_for('static', filename='hand.png') }}"
-              />
-              <img
-                style="
-                  width: 793px;
-                  height: 387px;
-                  left: 114px;
-                  top: 0px;
-                  position: absolute;
-                "
-                src="{{ url_for('static', filename='silver.png') }}"
-              />
+    
    
         </div>
       </div>
