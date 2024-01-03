@@ -20,7 +20,7 @@ latest_image_url = None
 
 music_links_data = list()
 
-openai.api_key = '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'
+openai.api_key = '**************'
 def generate_image_from_story(story):
     try:
         response = openai.Image.create(
