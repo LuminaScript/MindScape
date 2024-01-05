@@ -40,6 +40,10 @@ def analyze_sentiment(diary_text):
 ### AI Sandtable
 The AI Sandtable feature offers an interactive and creative outlet for users. They can select spiritual words, which the application then uses to generate a short story and a corresponding image. This feature employs OpenAI's GPT-3 for story generation and DALL-E for image creation, showcasing the synergy between storytelling and visual art.
 
+### AI Sandtable Library
+Store and retrieve generated mood libraries and images for future reflection. The AI Sandtable Library serves as a repository for mental well-being, offering users a personalized space to track their emotional journey.
+
+
 ## Conclusion
 
 MindScape stands out as a digital haven for relaxation, creativity, and emotional exploration. Its combination of sentiment analysis, storytelling, and visual artistry opens up new possibilities in the realm of digital therapy and personal well-being.
