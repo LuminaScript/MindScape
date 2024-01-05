@@ -1,7 +1,11 @@
 import openai
 
 def generate_image_from_story(story):
+<<<<<<< HEAD
     openai.api_key = '**********'  
+=======
+    openai.api_key = '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'  # Replace with your OpenAI API key
+>>>>>>> 86c4ef0 (finished)
 
     try:
         # Assuming DALL-E API has an endpoint similar to GPT-3 for image generation
